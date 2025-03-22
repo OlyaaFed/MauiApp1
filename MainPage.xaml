@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Стиль для заголовков -->
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="SlateBlue"/>
+            </Style>
+
+            <!-- Стиль для полей ввода (с использованием Frame для закругленных углов) -->
+            <Style x:Key="EntryFrameStyle" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Margin" Value="0,10"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="BackgroundColor" Value="AliceBlue"/>
+                <Setter Property="BorderColor" Value="LightGray"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+
+            <!-- Стиль для кнопки -->
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="RoyalBlue"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="HeightRequest" Value="45"/>
+                <Setter Property="Margin" Value="0,10"/>
+            </Style>
+
+            <!-- Стиль для списка задач -->
+            <Style x:Key="ListViewStyle" TargetType="ListView">
+                <Setter Property="SeparatorVisibility" Value="None"/>
+                <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+            </Style>
+
+            <!-- Стиль для текста в ячейке списка -->
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="DimGray"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <Label Text="Трекер Привычек" Style="{StaticResource TitleLabelStyle}" />
+
+     
+        <Frame Style="{StaticResource EntryFrameStyle}">
+            <Entry x:Name="todoName" Placeholder="Название привычки" />
+        </Frame>
+
+        <Frame Style="{StaticResource EntryFrameStyle}">
+            <Entry x:Name="todoFrequency" Placeholder="Как часто привычка" />
+        </Frame>
+
+        <Frame Style="{StaticResource EntryFrameStyle}">
+            <Entry x:Name="todoDescription" Placeholder="Описание привычки" />
+        </Frame>
+
+        <Button Text="Добавить привычку" Clicked="OnAddTodoClicked" Style="{StaticResource ButtonStyle}" />
+
+        <ListView ItemsSource="{Binding Todos}" Style="{StaticResource ListViewStyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="10">
+                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" Style="{StaticResource LabelStyle}" />
+                            <Label Text="{Binding Frequency}" FontSize="14" TextColor="Gray" Style="{StaticResource LabelStyle}" />
+                            <Label Text="{Binding Description}" FontSize="12" TextColor="Gray" Style="{StaticResource LabelStyle}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
